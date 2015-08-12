@@ -3,7 +3,7 @@
 	"version": "1.0.1",
 	"description": "A starter project including full setup for Jade, GulpJS, SASS & BroswerSync",
 	"main": "gulpfile.js",
-	"author": "Luminous Hilt",
+	"author": "Luminous Hilt (http://luminoushilt.com/)",
 	"license": "MIT",
 	"devDependencies": {
 		"browser-sync": "^2.8.2",
