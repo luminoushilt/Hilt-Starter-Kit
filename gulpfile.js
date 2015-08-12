@@ -16,7 +16,7 @@ var gulp        = require("gulp"),
 
 var code = {
 	sass: ["./Assets/css/**/*.sass", "./Assets/css/**/*.scss"],
-	jade: ["./**/*.jade", "./Assets/include/*.jade"],
+	jade: ["./*.jade", "./**/*.jade", "./Assets/include/*.jade"],
 	html: "./**/*.html",
 	css: "./Assets/css",
 	root: "./"
@@ -68,7 +68,7 @@ gulp.task('sass', function() {
 
 gulp.task('jade', function() {
 
-	return gulp.src(src.js)
+	return gulp.src(code.jade)
 		.pipe(plumber({
 			errorHandler: onError
 		}))
