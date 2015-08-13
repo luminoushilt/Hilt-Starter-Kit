@@ -279,28 +279,4 @@ th:last-child, td:last-child {
   padding: 0 20px;
   box-sizing: border-box; }
 
-/* Home page Styles */
-.home section {
-  max-width: 80vw;
-  margin-left: auto;
-  margin-right: auto; }
-  .home section::after {
-    clear: both;
-    content: "";
-    display: table; }
-  .home section .left {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 48.82117%; }
-    .home section .left:last-child {
-      margin-right: 0; }
-  .home section .right {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 48.82117%; }
-    .home section .right:last-child {
-      margin-right: 0; }
-
 /***** END: Page Title *****/

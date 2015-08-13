@@ -15,7 +15,7 @@ var gulp        = require("gulp"),
 // --------------------------------------------------------------------
 
 var code = {
-	sass: ["./Assets/css/**/*.sass", "./Assets/css/**/*.scss"],
+	sass: ['./Assets/css/1-tools/*.sass', './Assets/css/2-base/*.sass', './Assets/css/3-modules/*.sass', './Assets/css/4-pages/*.sass','./Assets/css/*.sass' , './Assets/css/1-tools/*.scss', './Assets/css/2-base/*.scss', './Assets/css/3-modules/*.scss', './Assets/css/4-pages/*.scss'],
 	jade: ["./*.jade", "./**/*.jade", "./Assets/include/*.jade"],
 	html: "./**/*.html",
 	css: "./Assets/css",
