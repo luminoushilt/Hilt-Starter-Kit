@@ -127,14 +127,14 @@ th:last-child, td:last-child
   border: 1px dashed $red
 
 // --------------------------------------------------------------------
-// * In Internet Explorer 8-10, SVG images with .img-responsive are disproportionately sized. 
-// * To fix this, add "width: 100% \9;" where necessary. 
+// * In Internet Explorer 8-10, SVG images with .img-responsive are disproportionately sized.
+// * To fix this, add "width: 100% \9;" where necessary.
 // --------------------------------------------------------------------
 
 .img-responsive
   display: block
-  max-width: $fill
   height: auto
+  max-width: $fill
 
 .pull-left
   float: left
@@ -147,9 +147,12 @@ th:last-child, td:last-child
   max-width: $fill
 
 .container
+  box-sizing: border-box
+  margin: 0 auto
+  max-width: $max-width
+  padding: 0 20px
   position: relative
   width: $full-width
-  max-width: $max-width
-  margin: 0 auto
-  padding: 0 20px
-  box-sizing: border-box
+
+#wrapper
+  margin: 1em auto
