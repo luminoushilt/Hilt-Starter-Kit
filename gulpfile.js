@@ -15,8 +15,8 @@ var gulp        = require("gulp"),
 // --------------------------------------------------------------------
 
 var code = {
-	sass: ["./Assets/css/**/*.sass", "./Assets/css/**/*.scss"],
-	jade: ["./**/*.jade", "./Assets/include/*.jade"],
+	sass: ['./Assets/css/1-tools/*.sass', './Assets/css/2-base/*.sass', './Assets/css/3-modules/*.sass', './Assets/css/4-pages/*.sass','./Assets/css/*.sass' , './Assets/css/1-tools/*.scss', './Assets/css/2-base/*.scss', './Assets/css/3-modules/*.scss', './Assets/css/4-pages/*.scss'],
+	jade: ["./*.jade", "./**/*.jade", "./Assets/include/*.jade"],
 	html: "./**/*.html",
 	css: "./Assets/css",
 	root: "./"
@@ -54,6 +54,7 @@ gulp.task('sass', function() {
 		}))
 		.pipe(sass({
 			includePaths: ['css'],
+			outputStyle: 'expanded',
 			onError: browserSync.notify
 		}))
 		.pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
@@ -68,7 +69,7 @@ gulp.task('sass', function() {
 
 gulp.task('jade', function() {
 
-	return gulp.src(src.js)
+	return gulp.src(code.jade)
 		.pipe(plumber({
 			errorHandler: onError
 		}))
