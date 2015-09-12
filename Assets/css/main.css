@@ -352,22 +352,4 @@ th:last-child, td:last-child {
   margin: 1em auto;
 }
 
-a.test-btn {
-  background-color: #00f;
-  border: 1px solid #000099;
-  border-radius: 5px;
-  color: #fff;
-  display: inline-block;
-  padding: 8px;
-  text-decoration: none;
-  -webkit-transition: all 0.3s ease-in-out;
-          transition: all 0.3s ease-in-out;
-}
-
-a.test-btn:hover {
-  background-color: #fff;
-  color: #00f;
-  text-decoration: none;
-}
-
 /***** END: Page Title *****/
