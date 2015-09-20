@@ -7,12 +7,14 @@
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.8.2",
-    "flightplan": "^0.6.4",
+    "flightplan": "~0.6.4",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
+    "gulp-image": "^1.0.5",
     "gulp-jade": "^1.1.0",
     "gulp-plumber": "^1.0.1",
-    "gulp-sass": "^2.0.4"
+    "gulp-sass": "^2.0.4",
+    "gulp-uglify": "^1.4.1"
   },
   "repository": {
     "type": "git",

@@ -5,7 +5,7 @@ plan.target('production', [
   {
     host: 'luminoushilt.net',
     username: 'luminous',
-    port: 2222,
+    port: 22,
     agent: process.env.SSH_AUTH_SOCK
   },
 ]);
@@ -17,7 +17,7 @@ plan.local(function(local) {
   // local.exec('gulp build');
 
   local.log('Copy files to remote hosts');
-  var filesToCopy = local.exec('_site/', {silent: true});
+  var filesToCopy = local.exec('git ls-files', {silent: true});
   // rsync files to all the destination's hosts
-  local.transfer(filesToCopy, '~/public_html');
+  local.transfer(filesToCopy, '~/www/luminoushilt.com/');
 });
