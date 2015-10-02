@@ -132,7 +132,7 @@ gulp.task('watch', function() {
 	gulp.watch(code.sass, ['sass']);
 	gulp.watch(code.img, ['image']);
 	gulp.watch(code.js, ['compress']);
-	gulp.watch(output.root).on('change', browserSync.reload);
+	gulp.watch([output.root, output.js]).on('change', browserSync.reload);
 });
 
 
