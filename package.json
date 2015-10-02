@@ -1,20 +1,23 @@
 {
-	"name": "Hilt-Dev-Kit",
-	"version": "1.0.1",
-	"description": "A starter project including setup for Jade, GulpJS, SASS & BroswerSync",
-	"main": "gulpfile.js",
-	"author": "Luminous Hilt (http://luminoushilt.com/)",
-	"license": "MIT",
-	"devDependencies": {
-		"browser-sync": "^2.8.2",
-		"gulp": "^3.9.0",
-		"gulp-autoprefixer": "^2.3.1",
-		"gulp-jade": "^1.1.0",
-		"gulp-plumber": "^1.0.1",
-		"gulp-sass": "^2.0.4"
-	},
-	"repository": {
-	"type": "git",
-	"url": "https://github.com/luminoushilt/Hilt-Starter-Kit.git"
-	}
+  "name": "Hilt-Dev-Kit",
+  "version": "1.0.1",
+  "description": "A starter project including setup for Jade, GulpJS, SASS & BroswerSync",
+  "main": "gulpfile.js",
+  "author": "Luminous Hilt (http://luminoushilt.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.8.2",
+    "flightplan": "~0.6.4",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-image": "^1.0.5",
+    "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-uglify": "^1.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luminoushilt/Hilt-Starter-Kit.git"
+  }
 }

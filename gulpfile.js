@@ -7,6 +7,8 @@ var gulp        = require("gulp"),
 	sass        = require("gulp-sass"),
 	plumber     = require("gulp-plumber"),
 	prefix      = require("gulp-autoprefixer"),
+	image		= require("gulp-image"),
+	uglify 		= require('gulp-uglify'),
 	browserSync = require("browser-sync").create();
 
 
@@ -16,20 +18,19 @@ var gulp        = require("gulp"),
 
 var code = {
 	sass: ['./Assets/css/1-tools/*.sass', './Assets/css/2-base/*.sass', './Assets/css/3-modules/*.sass', './Assets/css/4-pages/*.sass','./Assets/css/*.sass' , './Assets/css/1-tools/*.scss', './Assets/css/2-base/*.scss', './Assets/css/3-modules/*.scss', './Assets/css/4-pages/*.scss'],
-	jade: ["./*.jade", "./**/*.jade", "./Assets/include/*.jade"],
-	html: "./**/*.html",
+	jade: ["./*.jade", "./**/*.jade"],
+	js: "./Assets/js/*.js",
+	img: "./Assets/img/*",
 	css: "./Assets/css",
 	root: "./"
 };
 
- //var output = {
-	//js: "output/js",
-	//css: "output/css",
-	//img: "output/img/",
-	//html: "output/**.html",
-	//min_css: 'app.min.css',
-	//min_js: 'app.min.js'
-//};
+var output = {
+	js: "_site/Assets/js",
+	css: "_site/Assets/css",
+	img: "_site/Assets/img",
+	root: "_site/",
+};
 
 
 // --------------------------------------------------------------------
@@ -41,6 +42,35 @@ var onError = function(err) {
 	this.emit('end');
 };
 
+
+// --------------------------------------------------------------------
+// Task: Image
+// --------------------------------------------------------------------
+
+gulp.task('image', function () {
+
+  return gulp.src(code.img)
+	.pipe(plumber({
+		errorHandler: onError
+	}))
+	.pipe(image())
+    .pipe(gulp.dest(output.img));
+});
+
+
+// --------------------------------------------------------------------
+// Task: Compress / Ugligy
+// --------------------------------------------------------------------
+
+gulp.task('compress', function() {
+
+  return gulp.src(code.js)
+	.pipe(plumber({
+		errorHandler: onError
+	}))
+	.pipe(uglify())
+    .pipe(gulp.dest(output.js));
+});
 
 // --------------------------------------------------------------------
 // Task: Sass
@@ -58,8 +88,9 @@ gulp.task('sass', function() {
 			onError: browserSync.notify
 		}))
 		.pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
-		.pipe(gulp.dest(code.css))
-		.pipe(browserSync.stream());
+		.pipe(gulp.dest(output.css))
+		.pipe(browserSync.stream())
+		.pipe(gulp.dest(code.css));
 });
 
 
@@ -74,6 +105,7 @@ gulp.task('jade', function() {
 			errorHandler: onError
 		}))
 		.pipe(jade({pretty: true}))
+		.pipe(gulp.dest(output.root))
 		.pipe(gulp.dest(code.root));
 });
 
@@ -82,10 +114,10 @@ gulp.task('jade', function() {
 // Task: Browser Sync Server
 // --------------------------------------------------------------------
 
-gulp.task('serve', ['sass', 'jade'], function() {
+gulp.task('serve', ['sass', 'jade', 'image', 'compress'], function() {
 	browserSync.init({
 		server: {
-			baseDir: code.root
+			baseDir: output.root
 		}
 	});
 });
@@ -98,7 +130,9 @@ gulp.task('serve', ['sass', 'jade'], function() {
 gulp.task('watch', function() {
 	gulp.watch(code.jade, ['jade']);
 	gulp.watch(code.sass, ['sass']);
-	gulp.watch(code.html).on('change', browserSync.reload);
+	gulp.watch(code.img, ['image']);
+	gulp.watch(code.js, ['compress']);
+	gulp.watch([output.root, output.js]).on('change', browserSync.reload);
 });
 
 
