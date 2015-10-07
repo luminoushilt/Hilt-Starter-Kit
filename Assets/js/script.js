@@ -1,8 +1,10 @@
-function name() {
+(function($) {
+    function name() {
 
-}
+    }
 
-$(document).ready(function() {
-    // Get Started
+    $(document).ready(function() {
+        // Get Started
 
-});
+    });
+})(jQuery);
