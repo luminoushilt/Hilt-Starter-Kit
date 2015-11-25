@@ -18,7 +18,7 @@ var gulp        	= require('gulp'),
 
 var code = {
 	sass: ['_dev/Assets/css/1-tools/*.sass', '_dev/Assets/css/2-base/*.sass', '_dev/Assets/css/3-modules/*.sass', '_dev/Assets/css/4-pages/*.sass','_dev/Assets/css/*.sass' , '_dev/Assets/css/1-tools/*.scss', '_dev/Assets/css/2-base/*.scss', '_dev/Assets/css/3-modules/*.scss', '_dev/Assets/css/4-pages/*.scss'],
-	jade: '_dev/includes/*.jade',
+	jade: '_dev/Assets/includes/*.jade',
 	js: '_dev/Assets/js/*.js',
 	img: '_dev/Assets/img/*',
 	css: '_dev/Assets/css',
@@ -107,8 +107,7 @@ gulp.task('jade', function() {
 			errorHandler: onError
 		}))
 		.pipe(jade({pretty: true}))
-		.pipe(gulp.dest(output.root))
-		.pipe(gulp.dest(code.root));
+		.pipe(gulp.dest(output.root));
 });
 
 
