@@ -2,14 +2,14 @@
 // Plugins
 // --------------------------------------------------------------------
 
-var gulp        = require("gulp"),
-	jade		= require("gulp-jade"),
-	sass        = require("gulp-sass"),
-	plumber     = require("gulp-plumber"),
-	prefix      = require("gulp-autoprefixer"),
-	image		= require("gulp-image"),
-	uglify 		= require('gulp-uglify'),
-	browserSync = require("browser-sync").create();
+var gulp        	= require('gulp'),
+	jade			= require('gulp-jade'),
+	sass        	= require('gulp-sass'),
+	plumber     	= require('gulp-plumber'),
+	prefix      	= require('gulp-autoprefixer'),
+	image			= require('gulp-image'),
+	uglify 			= require('gulp-uglify'),
+	browserSync 	= require('browser-sync').create();
 
 
 // --------------------------------------------------------------------
@@ -17,19 +17,19 @@ var gulp        = require("gulp"),
 // --------------------------------------------------------------------
 
 var code = {
-	sass: ['./Assets/css/1-tools/*.sass', './Assets/css/2-base/*.sass', './Assets/css/3-modules/*.sass', './Assets/css/4-pages/*.sass','./Assets/css/*.sass' , './Assets/css/1-tools/*.scss', './Assets/css/2-base/*.scss', './Assets/css/3-modules/*.scss', './Assets/css/4-pages/*.scss'],
-	jade: ["./*.jade", "./**/*.jade"],
-	js: "./Assets/js/*.js",
-	img: "./Assets/img/*",
-	css: "./Assets/css",
-	root: "./"
+	sass: ['_dev/Assets/css/1-tools/*.sass', '_dev/Assets/css/2-base/*.sass', '_dev/Assets/css/3-modules/*.sass', '_dev/Assets/css/4-pages/*.sass','_dev/Assets/css/*.sass' , '_dev/Assets/css/1-tools/*.scss', '_dev/Assets/css/2-base/*.scss', '_dev/Assets/css/3-modules/*.scss', '_dev/Assets/css/4-pages/*.scss'],
+	jade: '_dev/includes/*.jade',
+	js: '_dev/Assets/js/*.js',
+	img: '_dev/Assets/img/*',
+	css: '_dev/Assets/css',
+	root: '_dev/'
 };
 
 var output = {
-	js: "_site/Assets/js",
-	css: "_site/Assets/css",
-	img: "_site/Assets/img",
-	root: "_site/",
+	js: '_site/Assets/js',
+	css: '_site/Assets/css',
+	img: '_site/Assets/img',
+	root: '_site/',
 };
 
 
@@ -47,7 +47,7 @@ var onError = function(err) {
 // Task: Image
 // --------------------------------------------------------------------
 
-gulp.task('image', function () {
+gulp.task('image', function() {
 
   return gulp.src(code.img)
 	.pipe(plumber({
@@ -59,10 +59,10 @@ gulp.task('image', function () {
 
 
 // --------------------------------------------------------------------
-// Task: Compress / Ugligy
+// Task: js / Ugligy
 // --------------------------------------------------------------------
 
-gulp.task('compress', function() {
+gulp.task('js', function() {
 
   return gulp.src(code.js)
 	.pipe(plumber({
@@ -71,6 +71,8 @@ gulp.task('compress', function() {
 	.pipe(uglify())
     .pipe(gulp.dest(output.js));
 });
+
+gulp.task('js-watch', ['js'], browserSync.reload);
 
 // --------------------------------------------------------------------
 // Task: Sass
@@ -114,7 +116,7 @@ gulp.task('jade', function() {
 // Task: Browser Sync Server
 // --------------------------------------------------------------------
 
-gulp.task('serve', ['sass', 'jade', 'image', 'compress'], function() {
+gulp.task('serve', ['sass', 'jade', 'image', 'js'], function() {
 	browserSync.init({
 		server: {
 			baseDir: output.root
@@ -131,8 +133,8 @@ gulp.task('watch', function() {
 	gulp.watch(code.jade, ['jade']);
 	gulp.watch(code.sass, ['sass']);
 	gulp.watch(code.img, ['image']);
-	gulp.watch(code.js, ['compress']);
-	gulp.watch([output.root, output.js]).on('change', browserSync.reload);
+	gulp.watch(code.js, ['js-watch']);
+	gulp.watch(output.root).on('change', browserSync.reload);
 });
 
 
