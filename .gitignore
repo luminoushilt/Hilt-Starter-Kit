@@ -59,7 +59,6 @@ Temporary Items
 
 ### grunt ###
 # Grunt usually compiles files inside this directory
-dist/
 _site/
 
 # Grunt usually preprocesses files such as coffeescript, compass... inside the .tmp directory
@@ -69,10 +68,6 @@ _site/
 ### Sass ###
 .sass-cache
 *.css.map
-
-### Jade ###
-*.jade
-
 
 # https://git-scm.com/docs/gitignore
 # https://help.github.com/articles/ignoring-files

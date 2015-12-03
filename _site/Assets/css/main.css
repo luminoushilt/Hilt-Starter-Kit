@@ -340,6 +340,20 @@ th:last-child, td:last-child {
   padding-right: 0;
 }
 
+.container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 980px;
+  min-width: 320px;
+  padding: 0 20px;
+  position: relative;
+  width: 100%;
+}
+
+#wrapper {
+  margin: 1em auto;
+}
+
 .border-help {
   background-color: #f6c;
   border: 1px dashed #f00;
@@ -364,17 +378,8 @@ th:last-child, td:last-child {
   max-width: 100%;
 }
 
-.container {
-  box-sizing: border-box;
-  margin: 0 auto;
-  max-width: 980px;
-  padding: 0 20px;
-  position: relative;
-  width: 100%;
-}
-
-#wrapper {
-  margin: 1em auto;
+.test {
+  padding: 50px;
 }
 
 /***** END: Page Title *****/

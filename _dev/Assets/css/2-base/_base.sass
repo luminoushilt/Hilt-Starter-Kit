@@ -106,7 +106,7 @@ li
 th, td
   padding: 12px 15px
   text-align: left
-  border-bottom: 1px solid #e1e1e1
+  border-bottom: 1px solid $table-border
 
 th:first-child, td:first-child
   padding-left: 0
@@ -114,37 +114,11 @@ th:first-child, td:first-child
 th:last-child, td:last-child
   padding-right: 0
 
-
-// Extra Classes
-
-.border-help
-  background-color: $pink
-  border: 1px dashed $red
-
-// --------------------------------------------------------------------
-// * In Internet Explorer 8-10, SVG images with .img-responsive are disproportionately sized.
-// * To fix this, add "width: 100% \9;" where necessary.
-// --------------------------------------------------------------------
-
-.img-responsive
-  display: block
-  height: auto
-  max-width: $fill
-
-.pull-left
-  float: left
-
-.pull-right
-  float: right
-
-.max-full-width
-  box-sizing: border-box
-  max-width: $fill
-
 .container
   box-sizing: border-box
   margin: 0 auto
   max-width: $max-width
+  min-width: $min-width
   padding: 0 20px
   position: relative
   width: $full-width
