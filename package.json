@@ -1,6 +1,6 @@
 {
   "name": "Hilt-Dev-Kit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A starter project including setup for Jade, GulpJS, SASS & BroswerSync",
   "main": "gulpfile.js",
   "author": "Luminous Hilt (http://luminoushilt.com/)",
