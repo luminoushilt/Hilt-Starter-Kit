@@ -2,14 +2,15 @@
 // Plugins
 // --------------------------------------------------------------------
 
-var gulp        	= require('gulp'),
-	jade			= require('gulp-jade'),
-	sass        	= require('gulp-sass'),
-	plumber     	= require('gulp-plumber'),
-	prefix      	= require('gulp-autoprefixer'),
-	image			= require('gulp-image'),
-	uglify 			= require('gulp-uglify'),
-	browserSync 	= require('browser-sync').create();
+var gulp = require('gulp'),
+	pug = require('gulp-pug'),
+	sass = require('gulp-sass'),
+	plumber = require('gulp-plumber'),
+	prefix = require('gulp-autoprefixer'),
+	image = require('gulp-image'),
+	uglify = require('gulp-uglify'),
+	coffee = require('gulp-coffee'),
+	browserSync = require('browser-sync').create();
 
 
 // --------------------------------------------------------------------
@@ -17,19 +18,22 @@ var gulp        	= require('gulp'),
 // --------------------------------------------------------------------
 
 var code = {
-	sass: ['_dev/Assets/css/1-tools/*.sass', '_dev/Assets/css/2-base/*.sass', '_dev/Assets/css/3-modules/*.sass', '_dev/Assets/css/4-pages/*.sass','_dev/Assets/css/*.sass' , '_dev/Assets/css/1-tools/*.scss', '_dev/Assets/css/2-base/*.scss', '_dev/Assets/css/3-modules/*.scss', '_dev/Assets/css/4-pages/*.scss'],
-	jade: '_dev/Assets/includes/*.jade',
-	js: '_dev/Assets/js/*.js',
+	sass: ['_dev/Assets/css/1-tools/*.sass', '_dev/Assets/css/2-base/*.sass', '_dev/Assets/css/3-modules/*.sass', '_dev/Assets/css/4-pages/*.sass', '_dev/Assets/css/*.sass', '_dev/Assets/css/1-tools/*.scss', '_dev/Assets/css/2-base/*.scss', '_dev/Assets/css/3-modules/*.scss', '_dev/Assets/css/4-pages/*.scss'],
+	pug: '_dev/*.pug',
+	coffee: '_dev/Assets/js/*.coffee',
+	jsOut: '_dev/Assets/js/',
+	jsIn: '_dev/Assets/js/*.js',
 	img: '_dev/Assets/img/*',
 	css: '_dev/Assets/css',
 	root: '_dev/'
 };
 
 var output = {
-	js: '_site/Assets/js',
+	js: '_site/Assets/js/',
 	css: '_site/Assets/css',
 	img: '_site/Assets/img',
-	root: '_site/',
+	html: '_site/*.html',
+	root: '_site/'
 };
 
 
@@ -49,27 +53,41 @@ var onError = function(err) {
 
 gulp.task('image', function() {
 
-  return gulp.src(code.img)
-	.pipe(plumber({
-		errorHandler: onError
-	}))
-	.pipe(image())
-    .pipe(gulp.dest(output.img));
+	return gulp.src(code.img)
+		.pipe(plumber({
+			errorHandler: onError
+		}))
+		.pipe(image())
+		.pipe(gulp.dest(output.img));
 });
 
+// --------------------------------------------------------------------
+// Task: Coffee Script
+// --------------------------------------------------------------------
+
+gulp.task('coffee', function() {
+	return gulp.src(code.coffee)
+		.pipe(plumber({
+			errorHandler: onError
+		}))
+		.pipe(coffee({
+			bare: true
+		}))
+		.pipe(gulp.dest(code.jsOut));
+});
 
 // --------------------------------------------------------------------
-// Task: js / Ugligy
+// Task: js / Uglify
 // --------------------------------------------------------------------
 
 gulp.task('js', function() {
 
-  return gulp.src(code.js)
-	.pipe(plumber({
-		errorHandler: onError
-	}))
-	.pipe(uglify())
-    .pipe(gulp.dest(output.js));
+	return gulp.src(code.jsIn)
+		.pipe(plumber({
+			errorHandler: onError
+		}))
+		.pipe(uglify())
+		.pipe(gulp.dest(output.js));
 });
 
 gulp.task('js-watch', ['js'], browserSync.reload);
@@ -89,33 +107,35 @@ gulp.task('sass', function() {
 			outputStyle: 'expanded',
 			onError: browserSync.notify
 		}))
-		.pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
+		.pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {
+			cascade: true
+		}))
 		.pipe(gulp.dest(output.css))
 		.pipe(browserSync.stream())
 		.pipe(gulp.dest(code.css));
 });
 
-
 // --------------------------------------------------------------------
-// Task: Jade
+// Task: pug
 // --------------------------------------------------------------------
 
-gulp.task('jade', function() {
+gulp.task('pug', function() {
 
-	return gulp.src(code.jade)
+	return gulp.src(code.pug)
 		.pipe(plumber({
 			errorHandler: onError
 		}))
-		.pipe(jade({pretty: true}))
+		.pipe(pug({
+			pretty: true
+		}))
 		.pipe(gulp.dest(output.root));
 });
-
 
 // --------------------------------------------------------------------
 // Task: Browser Sync Server
 // --------------------------------------------------------------------
 
-gulp.task('serve', ['sass', 'jade', 'image', 'js'], function() {
+gulp.task('serve', ['sass', 'pug', 'image', 'coffee', 'js'], function() {
 	browserSync.init({
 		server: {
 			baseDir: output.root
@@ -123,22 +143,21 @@ gulp.task('serve', ['sass', 'jade', 'image', 'js'], function() {
 	});
 });
 
-
 // --------------------------------------------------------------------
 // Task: Watch
 // --------------------------------------------------------------------
 
 gulp.task('watch', function() {
-	gulp.watch(code.jade, ['jade']);
+	gulp.watch(code.pug, ['pug']);
 	gulp.watch(code.sass, ['sass']);
 	gulp.watch(code.img, ['image']);
-	gulp.watch(code.js, ['js-watch']);
-	gulp.watch(output.root).on('change', browserSync.reload);
+	gulp.watch(code.coffee, ['coffee']);
+	gulp.watch(code.jsIn, ['js-watch']);
+	gulp.watch(output.html).on('change', browserSync.reload);
 });
-
 
 // --------------------------------------------------------------------
 // Task: Default
 // --------------------------------------------------------------------
 
-gulp.task('default', ['serve','watch']);
+gulp.task('default', ['serve', 'watch']);

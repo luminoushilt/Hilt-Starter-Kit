@@ -1,1 +1,1 @@
-!function(n){n(document).ready(function(){})}(jQuery);
+var getClass,getId,getSelector;getId=function(e){return document.getElementById(e)},getClass=function(e){return document.getElementByClassName(e)},getSelector=function(e){return document.querySelector(e)},function(){var e,t,n,r;return e="The quick brown fox jumps over the lazy dog.",n=["words",3,!1],t=[1,2,3,4,5,6,7,8,9,10],r=[10,9,8,7,6,5,4,3,2],getSelector("#content").innerHTML("<h1>"+e+"</h1>")}();

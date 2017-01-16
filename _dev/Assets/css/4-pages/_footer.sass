@@ -1,0 +1,64 @@
+footer
+	background-color: $gray
+	border-top: 1px solid darken($gray, 20%)
+	color: $white
+	display: table-row
+	height: 1px
+	padding: 40px 0
+
+	.capsule
+		box-sizing: border-box
+		display: flex
+		flex-direction: column
+		justify-content: center
+	    margin: 0 auto
+	    max-width: $max-width
+	    min-width: $min-width
+	    padding: 40px 20px
+	    position: relative
+		text-align: center
+	    width: $full-width
+
+		.navi
+
+			li
+				list-style: none
+
+				&:after
+					content: ""
+					display: block
+					height: 1px
+					width: 20px
+					background: $white
+					margin: 20px auto
+
+				a
+					color: $white
+
+					&:hover
+						color: $link-color
+
+@media (min-width: $tablet)
+	.capsule
+		flex-direction: row
+		justify-content: space-around
+
+		.navi
+			display: flex
+			flex-direction: row
+			justify-content: center
+
+			li
+				margin: 30px 0 0
+				padding: 0
+
+				&:after
+					display: none !important
+
+				&:last-of-type a
+					border-right: none
+
+				a
+					border-right: 1px solid $white
+					margin: 0
+					padding: 0 20px

@@ -1,25 +1,41 @@
-// Button Mixins
+// Button & Navigation Mixins
 
 =lum-btn($btn-color)
-    background-color: $btn-color
-    border: 1px solid darken($btn-color, 20%)
-    border-radius: 5px
-    color: $white
-    display: inline-block
-    padding: 8px
-    text-decoration: none
-    transition: all 0.15s ease-in-out
+	background-color: $btn-color
+	border: 1px solid darken($btn-color, 20%)
+	border-radius: 5px
+	color: $white
+	display: inline-block
+	padding: 8px
+	text-decoration: none
+	transition: all 0.15s ease-in-out
 
-    &:hover
-        background-color: $white
-        color: $btn-color
-        text-decoration: none
+	&:visited, &:link
+		color: $white
 
+	&:hover
+		background-color: $white
+		color: $btn-color
+		text-decoration: none
 
-// Helper Mixins
+=lum-navbar($back-color)
+	color: $back-color
+	font-size: 1.25rem
+	padding: 15px 18px 18px
+	text-decoration: none
 
-=pads($i)
-	padding: 1px * $i
+	&:visited, &:link
+		color: $back-color
 
-=mar($i)
-    margin: 1px * $i
+	&:hover
+		color: $link-color
+		text-decoration: none
+
+// Font Mixin
+
+=font-builder($family, $size, $lineHeight, $letterSpacing: normal, $style: normal)
+	font-family: $family, $verdana
+	font-size: $size
+	line-height: $lineHeight
+	letter-spacing: $letterSpacing
+	font-style: $style
